@@ -1,0 +1,16 @@
+# .htaccess - Password protect sensitive files
+<FilesMatch "^(view_tokens\.php|export\.php|clear\.php|tokens\.db)$">
+    AuthType Basic
+    AuthName "Restricted Area"
+    AuthUserFile /path/to/your/.htpasswd
+    Require user admin
+</FilesMatch>
+
+# Block direct access to .db files
+<FilesMatch "\.db$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Prevent directory listing
+Options -Indexes
